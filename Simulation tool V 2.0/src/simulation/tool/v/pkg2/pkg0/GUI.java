@@ -65,7 +65,7 @@ public class GUI {
         delimiterCombo=new ComboBox();
         formatCombo = new ComboBox();
         timeTxt = new TextField("1000");
-        pathTxt = new TextField("E:\\Data\\Level 04\\Graduation Project\\Test\\ASN");
+        pathTxt = new TextField("D:\\DATA\\Level 04\\Graduation project\\Test");
         pathTxt.setPrefWidth(290);
         dataTxt.setText("<%date>;<\"011\">;<%numeric8>;<%numeric11>;<%duration>");
         rowsTxt = new TextField("2");

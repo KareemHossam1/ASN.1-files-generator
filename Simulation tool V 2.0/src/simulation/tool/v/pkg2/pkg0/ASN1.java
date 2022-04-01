@@ -3,13 +3,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.SplittableRandom;
+
 public final class ASN1 {
     final String[] companiesDigits = {"30 ","31 ","32 ","35 "}; // Vodafone = 30, Etisalat = 31, Orange = 32, We = 35
-    int CDRsNumber , CDRsLengthWithoutHeader =0 , fileNumber = 0, addLineIteration = 1, addLineCounter = 0;
+    int CDRsNumber , CDRsLengthWithoutHeader =0 , fileNumber = 0;
     BufferedWriter fileBuffer;
     File fileFile;
     String CDR;
@@ -39,7 +39,7 @@ public final class ASN1 {
             */
             fileBuffer.write("ff ff ff ff 00 00 00 32 a2 a2 b6 2d da 00 b6 2d da 00 nn nn nn nn 00 00 00 01 04 a7 01 02 c7 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
             for(int i=0 ; i< CDRsNumber ; i++){ // Generate CDRs
-                fileBuffer.write(" " + generateCDR());
+                fileBuffer.write("\n" + generateCDR());
             }
         }
         catch ( IOException e ) {
@@ -50,7 +50,6 @@ public final class ASN1 {
                 fileBuffer.close();
             }
         }
-        modifyFile(fileFile);
     }
     
     private String generateFileName(){
@@ -79,11 +78,11 @@ public final class ASN1 {
     }
     
     private String stringToHex(String asciiField){
-        String returnString = "";
+        StringBuilder returnString = new StringBuilder();
         for (char ch : asciiField.toCharArray()) {
-            returnString += Integer.toHexString(ch) + " ";
+            returnString.append(Integer.toHexString(ch)).append(" ");
         }
-        return returnString;
+        return returnString.toString();
     }
     
     private String calledPartyAddress(){
@@ -114,20 +113,18 @@ public final class ASN1 {
     }
     
     private String intToHex(int integerField, int numberOfHexBytes){
-        String returnString = Integer.toHexString(integerField);
-        switch (numberOfHexBytes) {
-            case 0:
-                // 0 means it doesn't matter the number of bytes, but it should be an even number
-                if(returnString.length() % 2 != 0){
-                    returnString = "0" + returnString;
-                }   break;
-            default:
-                while(returnString.length() < numberOfHexBytes){
-                    returnString = "0" + returnString;
-                }   break;
+        StringBuilder returnString = new StringBuilder(Integer.toHexString(integerField));
+        if (numberOfHexBytes == 0) {// 0 means it doesn't matter the number of bytes, but it should be an even number
+            if (returnString.length() % 2 != 0) {
+                returnString.insert(0, "0");
+            }
+        } else {
+            while (returnString.length() < numberOfHexBytes) {
+                returnString.insert(0, "0");
+            }
         }
-        returnString = returnString.replaceAll("..(?!$)", "$0 ");  // Add a space after every 2 letters
-        return returnString;
+        returnString = new StringBuilder(returnString.toString().replaceAll("..(?!$)", "$0 "));  // Add a space after every 2 letters
+        return returnString.toString();
     }
     
     private String addCDRHeader(String CDRWithoutHeader){
@@ -140,33 +137,4 @@ public final class ASN1 {
         // Calculate CDR Length without spaces in terms of bytes (2 Chars)
         return intToHex(CDRsLengthInBytes, 4)+" a2 29 ";
     }
-    
-    /*
-        This method : 1- Calculates real values of file length and number of CDRs 
-                      2- Modifies the file header with these values
-                      3- Add \n after every 32 pair of characters instead of writing all data in a single line
-    */
-    private void modifyFile(File file) throws IOException{
-        RandomAccessFile randomFile = new RandomAccessFile(file, "rw");
-        // File length
-        randomFile.seek(0); // Go to first character
-        // File length(8 bytes) = File header length (50) + CDR Header length (4) * Number of CDRs + Total CDRs length without headers 
-        String fileLengthString = intToHex( 50 + 4 * CDRsNumber + CDRsLengthWithoutHeader , 8);
-        randomFile.write(fileLengthString.getBytes());
-        // Number of CDRs
-        randomFile.seek(54);   // 54 is the position of CDRs number bytes
-        randomFile.write(intToHex(CDRsNumber, 8).getBytes());
-        // This program writes all data in one line, so we need to add a line after every 32 byte
-        while(95 * addLineIteration + addLineCounter < randomFile.length()){
-            randomFile.seek(95 * addLineIteration + addLineCounter);  
-            randomFile.write("\n".getBytes());
-            addLineIteration++;
-            addLineCounter++;
-        }
-        randomFile.close();
-    }
 }
-// Added ASN.1 to combo box
-// Added if statement for generating ASN.1 to a new class
-// Switch Case
-// My Case
