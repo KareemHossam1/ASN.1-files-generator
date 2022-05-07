@@ -9,27 +9,26 @@ import java.util.SplittableRandom;
 
 public final class ASN1 {
     final String[] companiesDigits = {"30 ","31 ","32 ","35 "}; // Vodafone = 30, Etisalat = 31, Orange = 32, We = 35
-    int CDRsNumber , CDRsLengthWithoutHeader =0 , fileNumber = 0;
+    int CDRsNumber , CDRsLengthWithoutHeader =0 ;
     BufferedWriter fileBuffer;
     File fileFile;
     String CDR;
+    StringBuilder fileNameBuilder;
     public ASN1(String path, String fileName, int rows){
         CDRsNumber = rows;
+        fileNameBuilder = new StringBuilder(fileName);
         try{
-            createFile( path , fileName );
+            createFile( path , fileNameBuilder );
         }
         catch(IOException e){
             System.out.println("IOException in constructor of ASN1");
         }
     }
     
-    private void createFile(String path, String fileName) throws IOException{
+    private void createFile(String path, StringBuilder fileNameBuilder) throws IOException{
         fileBuffer = null;
         try{
-            fileFile = new File(path + "\\" + fileName + generateFileName()+".asn1");
-            while(fileFile.exists()){
-                fileFile = new File(path + "\\" + fileName + generateFileName()+".asn1");
-            }
+            fileFile = new File(path + "\\" + generateFileName(fileNameBuilder)+".asn1");
             fileBuffer = new BufferedWriter(new FileWriter(fileFile));
             /*  
                 Firstly, write the file header
@@ -43,7 +42,7 @@ public final class ASN1 {
             }
         }
         catch ( IOException e ) {
-            System.out.println("IOException in createFile()");
+            e.printStackTrace();
         }
         finally {
             if ( fileBuffer != null ) {
@@ -52,9 +51,9 @@ public final class ASN1 {
         }
     }
     
-    private String generateFileName(){
-        fileNumber++;
-        return "_" + fileNumber;
+    private StringBuilder generateFileName(StringBuilder fileNameBuilder){
+        fileNameBuilder.append("_").append(System.currentTimeMillis());
+        return fileNameBuilder;
     }
     
     private String generateCDR(){
@@ -107,7 +106,7 @@ public final class ASN1 {
     }
     
     private String duration(){
-        String randomDuration =  intToHex( new SplittableRandom().nextInt(1, 360000000), 0);
+        String randomDuration =  intToHex( new SplittableRandom().nextInt(100001, 360000000), 0);
         //     Tag         + Length of duration value                  + " " + Duration Value
         return "9f 81 48 " + intToHex((randomDuration.length()+1)/3, 0)+ " " + randomDuration;    
     }
@@ -136,5 +135,9 @@ public final class ASN1 {
         CDRsLengthWithoutHeader += CDRsLengthInBytes;
         // Calculate CDR Length without spaces in terms of bytes (2 Chars)
         return intToHex(CDRsLengthInBytes, 4)+" a2 29 ";
+    }
+
+    public String getName(){
+        return fileNameBuilder.toString();
     }
 }

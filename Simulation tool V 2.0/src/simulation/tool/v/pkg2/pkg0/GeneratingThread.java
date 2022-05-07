@@ -3,6 +3,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -53,6 +55,7 @@ public class GeneratingThread extends Thread{
                 break;
             case "ASN.1":
                 ASN1 ASN1File = new ASN1(pathRe,filesNameRe,Integer.valueOf(rowsRe));
+                Files.copy(Paths.get("D:\\DATA\\Level 04\\Graduation project\\Test\\Pre-Processing\\"+ASN1File.getName()+".asn1"), Paths.get("D:\\DATA\\Level 04\\Graduation project\\Test\\ASN\\"+ASN1File.getName()+".asn1"));
                 break;
             default:
                 output = null;

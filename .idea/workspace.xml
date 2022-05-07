@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04ce291f-95d8-4c01-b4ee-e707230af56d" name="Changes" comment="">
+    <list default="true" id="04ce291f-95d8-4c01-b4ee-e707230af56d" name="Changes" comment="Every CDR on a single line">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/ASN1.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/ASN1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GeneratingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GeneratingThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/ASN1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/ASN1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GeneratingThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GeneratingThread.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +41,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="D:/Projects/java-crm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RunManager">
@@ -72,7 +75,37 @@
       <option name="presentableId" value="Default" />
       <updated>1641047448927</updated>
     </task>
+    <task id="LOCAL-00001" summary="Every CDR on a single line">
+      <created>1648813802138</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1648813802138</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Every CDR on a single line">
+      <created>1648813899403</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648813899403</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Every CDR on a single line" />
+    <option name="LAST_COMMIT_MESSAGE" value="Every CDR on a single line" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
