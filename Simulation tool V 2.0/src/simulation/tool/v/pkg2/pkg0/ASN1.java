@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.SplittableRandom;
-
 public final class ASN1 {
     final String[] companiesDigits = {"30 ","31 ","32 ","35 "}; // Vodafone = 30, Etisalat = 31, Orange = 32, We = 35
     int CDRsNumber , CDRsLengthWithoutHeader =0 ;
@@ -24,7 +23,6 @@ public final class ASN1 {
             System.out.println("IOException in constructor of ASN1");
         }
     }
-    
     private void createFile(String path, StringBuilder fileNameBuilder) throws IOException{
         fileBuffer = null;
         try{
@@ -50,18 +48,15 @@ public final class ASN1 {
             }
         }
     }
-    
     private StringBuilder generateFileName(StringBuilder fileNameBuilder){
         fileNameBuilder.append("_").append(System.currentTimeMillis());
         return fileNameBuilder;
     }
-    
     private String generateCDR(){
         CDR = listOfCallingPartyAddress() + calledPartyAddress() + serviceRequestTimeStamp() + duration();
         CDR = addCDRHeader(CDR) + CDR;
         return CDR;
     }
-    
     private String listOfCallingPartyAddress(){
         /*  
             Tag "a6 13 81 11" + Value
@@ -75,7 +70,6 @@ public final class ASN1 {
                 // Choose random value from 100000000 to 199999999 then remove first digit to get a random 8-digits number
                 + stringToHex(String.valueOf(new SplittableRandom().nextInt(100000000, 199999999)).substring(1)); 
     }
-    
     private String stringToHex(String asciiField){
         StringBuilder returnString = new StringBuilder();
         for (char ch : asciiField.toCharArray()) {
@@ -83,7 +77,6 @@ public final class ASN1 {
         }
         return returnString.toString();
     }
-    
     private String calledPartyAddress(){
         /*  
             Tag "a7 13 81 11" + Value
@@ -97,20 +90,17 @@ public final class ASN1 {
                 // Choose random value from 100000000 to 199999999 then remove first digit to get a random 8-digits number
                 + stringToHex(String.valueOf(new SplittableRandom().nextInt(100000000, 199999999)).substring(1)); 
     }
-    
     private String serviceRequestTimeStamp(){
         Date date = new Date();
         String nowDate = new SimpleDateFormat("yy MM dd HH mm ss").format(date);
         //     Tag      + Value        + "+02:00"
         return "89 09 " + nowDate + " 2B 02 00 "; 
     }
-    
     private String duration(){
         String randomDuration =  intToHex( new SplittableRandom().nextInt(100001, 360000000), 0);
         //     Tag         + Length of duration value                  + " " + Duration Value
         return "9f 81 48 " + intToHex((randomDuration.length()+1)/3, 0)+ " " + randomDuration;    
     }
-    
     private String intToHex(int integerField, int numberOfHexBytes){
         StringBuilder returnString = new StringBuilder(Integer.toHexString(integerField));
         if (numberOfHexBytes == 0) {// 0 means it doesn't matter the number of bytes, but it should be an even number
@@ -125,7 +115,6 @@ public final class ASN1 {
         returnString = new StringBuilder(returnString.toString().replaceAll("..(?!$)", "$0 "));  // Add a space after every 2 letters
         return returnString.toString();
     }
-    
     private String addCDRHeader(String CDRWithoutHeader){
         int CDRsLengthInBytes = (CDRWithoutHeader.length()+1)/3;
         /*
@@ -136,7 +125,6 @@ public final class ASN1 {
         // Calculate CDR Length without spaces in terms of bytes (2 Chars)
         return intToHex(CDRsLengthInBytes, 4)+" a2 29 ";
     }
-
     public String getName(){
         return fileNameBuilder.toString();
     }

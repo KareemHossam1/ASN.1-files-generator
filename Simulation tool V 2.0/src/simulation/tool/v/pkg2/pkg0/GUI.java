@@ -25,15 +25,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 public class GUI {
     
-    int threadsNumber,editedItemIndex;
-    Label titleLbl,dataLbl,delimiterLbl,formatLbl,pathLbl,timeLbl,rowsLbl,filesNameLbl;
-    ComboBox formatCombo,delimiterCombo;
-    TextField dataTxt,pathTxt,timeTxt,rowsTxt,filesNameTxt;
+    int editedItemIndex;
+    Label titleLbl, dataLbl, delimiterLbl, formatLbl, pre_pathLbl, timeLbl, rowsLbl, filesNameLbl, targetPathLbl;
+    ComboBox <String> formatCombo,delimiterCombo;
+    TextField dataTxt, pre_pathTxt, timeTxt, rowsTxt, filesNameTxt, targetPathTxt;
     Button generateBtn,stopBtn,resetBtn,addBtn,editBtn,copyBtn,removeBtn,saveBtn,loadBtn;
-    ListView list;
-    ObservableList items;
+    ListView <String> list;
+    ObservableList <String>items;
     List<GeneratingThread> threads;
-    HBox dataH,delimiterH,formatH, pathH,rowsH,timeH,filesNameH,addH,btnH;
+    HBox dataH, delimiterH, formatH, pre_pathH, rowsH, timeH, filesNameH, addH, btnH, targetPathH;
     VBox listV,mainV;
     Stage primaryStage;
     String editedItem;
@@ -41,7 +41,7 @@ public class GUI {
     public GUI(Stage primaryStage){
         guiBuilder();
         buttonsEventHandellers();
-        Scene scene = new Scene(mainV, 410, 710);
+        Scene scene = new Scene(mainV, 410, 750);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Simulation tool");
         primaryStage.setScene(scene);
@@ -50,23 +50,26 @@ public class GUI {
     
     private void guiBuilder(){
         
-        titleLbl = new Label("       Simulation Tool V 4.0");
+        titleLbl = new Label("\t   Simulation Tool");
         titleLbl.setFont(new Font("Arial", 30));
         dataLbl = new Label("Data\t          ");
         delimiterLbl =new Label("Delimeter  ");
         formatLbl = new Label("Format      ");
-        pathLbl = new Label("Path\t          ");
+        pre_pathLbl = new Label("Pre-Path    ");
+        targetPathLbl = new Label("Target Path");
         timeLbl = new Label("Time(ms)   ");
-        rowsLbl = new Label("Rows         ");
+        rowsLbl = new Label("Records     ");
         filesNameLbl = new Label("Files Name");
         
         dataTxt = new TextField();
         dataTxt.setPrefWidth(290);
-        delimiterCombo=new ComboBox();
+        delimiterCombo = new ComboBox();
         formatCombo = new ComboBox();
         timeTxt = new TextField("1000");
-        pathTxt = new TextField("D:\\DATA\\Level 04\\Graduation project\\Test\\Pre-Processing");
-        pathTxt.setPrefWidth(290);
+        pre_pathTxt = new TextField("D:\\DATA\\Level 04\\Graduation project\\Test\\Pre-Processing");
+        pre_pathTxt.setPrefWidth(290);
+        targetPathTxt = new TextField("D:\\DATA\\Level 04\\Graduation project\\Test\\ASN");
+        targetPathTxt.setPrefWidth(290);
         dataTxt.setText("<%date>;<\"011\">;<%numeric8>;<%numeric11>;<%duration>");
         rowsTxt = new TextField("2");
         filesNameTxt = new TextField("Kareem");
@@ -95,7 +98,8 @@ public class GUI {
         btnH = new HBox(20);
         btnH.setPadding(new Insets(0,0,0,80));
         formatH = new HBox(20);
-        pathH = new HBox(20);
+        pre_pathH = new HBox(20);
+        targetPathH = new HBox(15);
         rowsH = new HBox(20);
         timeH = new HBox(20);
         addH = new HBox(20);
@@ -119,14 +123,15 @@ public class GUI {
         dataH.getChildren().addAll(dataLbl,dataTxt);
         delimiterH.getChildren().addAll(delimiterLbl,delimiterCombo);
         formatH.getChildren().addAll(formatLbl,formatCombo);
-        pathH.getChildren().addAll(pathLbl,pathTxt);
+        pre_pathH.getChildren().addAll(pre_pathLbl, pre_pathTxt);
+        targetPathH.getChildren().addAll(targetPathLbl, targetPathTxt);
         rowsH.getChildren().addAll(rowsLbl,rowsTxt);
         timeH.getChildren().addAll(timeLbl,timeTxt);
         filesNameH.getChildren().addAll(filesNameLbl,filesNameTxt);
         btnH.getChildren().addAll(generateBtn,stopBtn,resetBtn);
         listV.getChildren().addAll(addBtn,editBtn,copyBtn,removeBtn,saveBtn,loadBtn);
         addH.getChildren().addAll(listV,list);
-        mainV.getChildren().addAll(titleLbl,dataH,pathH,timeH,rowsH,filesNameH,formatH,delimiterH,addH,btnH);
+        mainV.getChildren().addAll(titleLbl, dataH, pre_pathH, targetPathH, timeH, rowsH, filesNameH, formatH, delimiterH, addH, btnH);
         mainV.setPadding(new Insets(20,0,0,15));
         
     }
@@ -136,7 +141,7 @@ public class GUI {
         generateBtn.setOnAction((event) -> {
             items = list.getItems();
             items.forEach((item)->{
-                GeneratingThread thread = new GeneratingThread(item.toString());
+                GeneratingThread thread = new GeneratingThread(item);
                 thread.start();
                 threads.add(thread);
             });
@@ -169,7 +174,7 @@ public class GUI {
         resetBtn.setOnAction((event->{
             list.getItems().clear();
             dataTxt.setText("");
-            pathTxt.setText("");
+            pre_pathTxt.setText("");
             timeTxt.setText("1000");
             rowsTxt.setText("1000");
             filesNameTxt.setText("");
@@ -180,7 +185,7 @@ public class GUI {
         addBtn.setOnAction((event)->{
             list.getItems().add("FilesName: " + filesNameTxt.getText()+" , "+formatCombo.getValue()+" , "+
                     dataTxt.getText()+" , Delimiter: "+delimiterCombo.getValue()+" , "+
-                    Paths.get(pathTxt.getText()).toAbsolutePath()+" , "+timeTxt.getText()+
+                    Paths.get(pre_pathTxt.getText()).toAbsolutePath()+"\\ , "+Paths.get(targetPathTxt.getText()).toAbsolutePath() +"\\ , " + timeTxt.getText()+
                     " ms , #" + rowsTxt.getText());
             list.getSelectionModel().select(list.getItems().size()-1);
         });
@@ -206,7 +211,7 @@ public class GUI {
                 editBtn.setText("Edit");
                 list.getItems().set(editedItemIndex, "FilesName: "+filesNameTxt.getText()+" , "
                         +formatCombo.getValue()+" , "+dataTxt.getText()+" , Delimiter: "+delimiterCombo.getValue()
-                        +" , "+Paths.get(pathTxt.getText()).toAbsolutePath()+" , "+timeTxt.getText()+
+                        +" , "+Paths.get(pre_pathTxt.getText()).toAbsolutePath()+" , "+timeTxt.getText()+
                         " ms , #" + rowsTxt.getText());
                 
                 list.setDisable(false);
@@ -277,7 +282,7 @@ public class GUI {
                 formatCombo.getSelectionModel().select(foundRegex.group("formatRe"));
                 dataTxt.setText(foundRegex.group("dataRe"));
                 delimiterCombo.getSelectionModel().select(foundRegex.group("delimiterDataRe"));
-                pathTxt.setText(foundRegex.group("pathRe"));
+                pre_pathTxt.setText(foundRegex.group("pathRe"));
                 timeTxt.setText(foundRegex.group("timeRe"));
                 rowsTxt.setText(foundRegex.group("rowsRe"));
             }
