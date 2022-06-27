@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04ce291f-95d8-4c01-b4ee-e707230af56d" name="Changes" comment="Nifi Fix + Pre-Processing Folder Hard-Coded">
-      <change afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/CSV.java" afterDir="false" />
+    <list default="true" id="04ce291f-95d8-4c01-b4ee-e707230af56d" name="Changes" comment="Fixing ASN1 + JSON + CSV &amp; Removing unnecessary features">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/ASN1.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/ASN1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/CSV.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GeneratingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/GeneratingThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/JSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation tool V 2.0/src/simulation/tool/v/pkg2/pkg0/JSON.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/ASN1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/ASN1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GeneratingThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simulation tool V 2.0 (5)/simulation/tool/v/pkg2/pkg0/GeneratingThread.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +46,10 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/karee/OneDrive/Desktop/Simulation tool V 2.0 (5)&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/karee/OneDrive/Desktop/Simulation tool V 2.0 (5)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RunManager">
@@ -101,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651934977398</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixing ASN1 + JSON + CSV &amp; Removing unnecessary features">
+      <created>1652582915441</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652582915441</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,7 +126,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Every CDR on a single line" />
     <MESSAGE value="Nifi Fix + Pre-Processing Folder Hard-Coded" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nifi Fix + Pre-Processing Folder Hard-Coded" />
+    <MESSAGE value="Fixing ASN1 + JSON + CSV &amp; Removing unnecessary features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing ASN1 + JSON + CSV &amp; Removing unnecessary features" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

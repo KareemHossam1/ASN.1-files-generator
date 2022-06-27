@@ -24,7 +24,6 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 public class GUI {
-    
     int editedItemIndex;
     Label titleLbl, dataLbl, delimiterLbl, formatLbl, pre_pathLbl, timeLbl, rowsLbl, filesNameLbl, targetPathLbl;
     ComboBox <String> formatCombo,delimiterCombo;
@@ -37,7 +36,6 @@ public class GUI {
     VBox listV,mainV;
     Stage primaryStage;
     String editedItem;
-    
     public GUI(Stage primaryStage){
         guiBuilder();
         buttonsEventHandellers();
@@ -47,10 +45,9 @@ public class GUI {
         primaryStage.setScene(scene);
         primaryStage.show();
 }
-    
     private void guiBuilder(){
         
-        titleLbl = new Label("\t   Simulation Tool");
+        titleLbl = new Label("هانت \t\t\t   ");
         titleLbl.setFont(new Font("Arial", 30));
         dataLbl = new Label("Data\t          ");
         delimiterLbl =new Label("Delimeter  ");

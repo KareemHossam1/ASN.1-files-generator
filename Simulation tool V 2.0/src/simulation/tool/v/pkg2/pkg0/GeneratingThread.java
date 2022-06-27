@@ -30,7 +30,7 @@ public class GeneratingThread extends Thread{
         while(true){
             try{
                 Thread.sleep(Integer.parseInt(timeRe));
-                createFile();
+                createCDRsFile();
             }
             catch(InterruptedException e){
                 e.printStackTrace();
@@ -39,10 +39,10 @@ public class GeneratingThread extends Thread{
             }
         }
     }
-    public void createFile() throws IOException{
+    public void createCDRsFile() throws IOException{
         switch (formatRe) {
             case "json":
-                JSON jsonFile = new JSON(Integer.parseInt(rowsRe), prePathRe, filesNameRe, "C");
+                JSON jsonFile = new JSON(Integer.parseInt(rowsRe), prePathRe, filesNameRe, "M");
                 String jsonFileName = jsonFile.getName();
                 Files.copy(Paths.get(prePathRe + jsonFileName), Paths.get(targetRe + jsonFileName));
                 break;
@@ -52,9 +52,10 @@ public class GeneratingThread extends Thread{
                 Files.copy(Paths.get(prePathRe + asnFileName + ".asn1"), Paths.get(targetRe + asnFileName + ".asn1"));
                 break;
             case "csv":
-                CSV csvFile = new CSV(Integer.parseInt(rowsRe), prePathRe, filesNameRe, delimiterDataRe, "C" );
+                CSV csvFile = new CSV(Integer.parseInt(rowsRe), prePathRe, filesNameRe, delimiterDataRe, "M" );
                 String csvFileName = csvFile.getName();
                 Files.copy(Paths.get(prePathRe + csvFileName), Paths.get(targetRe + csvFileName));
         }
     }
+
 }
